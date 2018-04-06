@@ -2,9 +2,7 @@
 var actorChars = {
   "@": Player,
   "o": Coin, // A coin will wobble up and down
-  "=": Lava, "|": Lava, "v": Lava,
-  "c": Cloud
-
+  "=": Lava, "|": Lava, "v": Lava
 };
 
 function Level(plan) {
@@ -102,14 +100,6 @@ function Coin(pos) {
 }
 Coin.prototype.type = "coin";
 
-function Cloud(pos, ch) {
-  this.pos = pos;
-  this.size = new Vector(4,1);
-  if (ch == "c"){
-    this.speed = new Vector (2,0);
-  }
-}
-Cloud.prototype.type = "cloud";
 
 // Lava is initialized based on the character, but otherwise has a
 // size and position
@@ -274,7 +264,6 @@ Level.prototype.actorAt = function(actor) {
       // overlap and return the other actor if found
       return other;
   }
-
 };
 
 // Update simulation each step based on keys & step size
@@ -317,16 +306,10 @@ Coin.prototype.act = function(step) {
   this.pos = this.basePos.plus(new Vector(0, wobblePos));
 };
 
+var maxStep = 0.05;
 
 var playerXSpeed = 7;
 
-Cloud.prototype.act = function(step, level) {
-  var newPos = this.pos.plus(this.speed.times(step));
-  if (!level.obstacleAt(newPos, this.size))
-  this.pos = newPos;
-  else
-    this.speed = this.speed.times(-1);
-};
 
 Player.prototype.moveX = function(step, level, keys) {
   this.speed.x = 0;
@@ -343,12 +326,6 @@ Player.prototype.moveX = function(step, level, keys) {
     level.playerTouched(obstacle);
   else
     // Move if there's not an obstacle there.
-    this.pos = newPos;
-
-  var actor = level.actorAt(newPos, this.size);
-  if (actor)
-    level.playerTouched(actor);
-  else
     this.pos = newPos;
 
 };

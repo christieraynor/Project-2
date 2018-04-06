@@ -9,7 +9,7 @@
 .warp          { background: rgba(199, 21, 133, 0.6);}
 .hiddenwarp    { background: rgb(204, 238, 255);}
 .reset         { background: rgb(72, 208, 180);}
-.Cloud         { background: white;}
+
 
 .actor  { position: absolute;  }
 .coin   { background: rgb(239, 203, 29); }
