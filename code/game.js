@@ -50,6 +50,8 @@ function Level(plan) {
         fieldType = "reset";
 
 
+
+
       // "Push" the fieldType, which is a string, onto the gridLine array (at the end).
       gridLine.push(fieldType);
     }
@@ -119,6 +121,7 @@ function Lava(pos, ch) {
   }
 }
 Lava.prototype.type = "lava";
+
 
 // Helper function to easily create an element of a type provided
 function elt(name, className) {
@@ -486,5 +489,5 @@ function runGame(plans, Display) {
         console.log("You win!");
     });
   }
-  startLevel(0);
+  startLevel(3);
 }
